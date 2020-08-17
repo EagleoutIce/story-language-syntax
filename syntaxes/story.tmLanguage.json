@@ -1,0 +1,135 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Story",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#numeric"
+		},
+		{
+			"include": "#variable"
+		},
+		{
+			"include": "#support_roles"
+		},
+		{
+			"include": "#null"
+		},
+		{
+			"include": "#point"
+        },
+        {
+            "include": "#operation"
+        }
+	],
+	"repository": {
+		"comment": {
+			"patterns": [
+				{
+					"include": "#comment_line"
+				}
+			]
+		},
+		"comment_line": {
+			"name": "comment.line.hash",
+			"match": "^ *#.*"
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.story",
+					"match": "^ *\\b(HELLO|SLEEP|TIMEOUT|CRASH|RECONNECT|LEAVE|META|PAUSE|RESUME|DELETE|RENAME|ITEM|EQUIP|ITER|RETI|SET|LET|UNSET|ASSURE_DEFAULT|PRESET|DOS|CONFIG_INJECT|SERVER_CONFIG|ALLOW_ERRORS|FORBID_ERRORS|OPERATION|PRINT|ADD|SUB|MUL|DIV|MOD|CALL|BREAK_EQ|SET_LEQ|SET_GEQ|SET_EQ|SET_NEQ|SET_LT|SET_GT|SET_PRESENT|IF|IF_NOT|ELSE|FI|COLLECT_START|COLLECT_END)\\b"
+				}
+			]
+		},
+		"support_roles": {
+			"patterns": [
+				{
+					"name": "storage.type",
+					"match": "\\b(PLAYER|player|SPECTATOR|spectator|AI|ai)\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.story",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.story",
+					"match": "\\\\."
+                }, {
+                    "name": "storage.type",
+                    "match": "\\$\\{(?<key>[^:}]*)(:(?<option>(.\\{.+})*|[^}]*))?}"
+                }
+			]
+		},
+		"numeric": {
+			"match": "[ :\\-+,;]+([0-9]+(\\.[0-9]+)?)",
+			"captures": {
+				"1" : {
+					"name" : "constant.numeric" 
+				}
+			}
+        },
+        "point": {
+			"match": "[\\-+]?((\\()([+-]?\\d+),\\s*([+-]?\\d+)(\\))|(\\<)([+-]?\\d+),\\s*([+-]?\\d+)(\\>)|(\\d+)\\/([+-]?\\d+))",
+			"captures": {
+				"2" : {
+					"name" : "storage.type" 
+                },
+                "5" : {
+					"name" : "storage.type" 
+                },
+                "6" : {
+					"name" : "storage.type" 
+                },
+                "9" : {
+					"name" : "storage.type" 
+                },
+                "11" : {
+					"name" : "storage.type" 
+                },
+                "3" : {
+					"name" : "constant.numeric" 
+                },
+                "4" : {
+					"name" : "constant.numeric" 
+                },
+                "7" : {
+					"name" : "constant.numeric" 
+                },
+                "8" : {
+					"name" : "constant.numeric" 
+                },
+                "10" : {
+					"name" : "constant.numeric" 
+                },
+                "12" : {
+					"name" : "constant.numeric" 
+				}
+			}
+        },
+		"null": {
+            "name" : "constant.language",
+			"match": "\\b(null|value|random|random-gadget|random-character) \\b"
+        },
+        "operation": {
+            "name" : "punctuation",
+			"match": "\\b(movement|MOVEMENT|retire|RETIRE|gamble|GAMBLE|<ignored>)\\b"
+		},
+		"variable": {
+			"name": "entity.name.function",
+			"match": "\\$\\{(?<key>[^:}]*)(:(?<option>(.\\{.+})*|[^}]*))?}"
+        }
+	},
+	"scopeName": "source.story"
+}

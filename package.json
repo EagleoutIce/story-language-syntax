@@ -1,0 +1,25 @@
+{
+    "name": "story-language",
+    "displayName": "story-language",
+    "description": "Provides syntax for the story language",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.44.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "story",
+            "aliases": ["Story", "story"],
+            "extensions": [".story",".story-preset"],
+            "configuration": "./language-configuration.json"
+        }], 
+        "grammars": [{
+            "language": "story",
+            "scopeName": "source.story",
+            "path": "./syntaxes/story.tmLanguage.json"
+        }]
+    }
+}
